@@ -1,0 +1,32 @@
+---
+# Tasks to reach desired state present with role tools
+# We cache a lot for speed and resilience
+
+- name: Check files
+  ansible.builtin.stat:
+    path: "{{ playbook_dir }}/files/{{ images_tarball }}"
+  register: tar_stat
+
+- name: Download files
+  when: tar_stat.exists is not defined
+  ansible.builtin.get_url:
+    url: "{{ item }}"
+    dest: "{{ playbook_dir }}/files/"
+    mode: '0644'
+  loop: "{{ file_downloads }}"
+  no_log: "{{ not debug }}"
+  retries: 3
+  register: downloaded_files
+
+- name: Check RPM
+  ansible.builtin.stat:
+    path: "{{ playbook_dir }}/files/{{ k3s_rpm }}"
+  register: rpm_stat
+
+- name: Download k3s-selinux package
+  when: rpm_stat.exists is not defined
+  ansible.builtin.get_url:
+    url: "{{ rpm_download }}"
+    dest: "{{ playbook_dir }}/files/"
+    mode: '0644'
+  no_log: "{{ not debug }}"

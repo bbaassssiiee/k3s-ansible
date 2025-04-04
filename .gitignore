@@ -1,0 +1,8 @@
+venv
+.venv
+.vscode
+.vagrant
+.ansible
+files/k?s*
+inventory.yml
+playbook/debug.yml

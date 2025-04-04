@@ -1,0 +1,26 @@
+---
+# Verify files are downloaded for airgapped install
+
+- name: Check files
+  ansible.builtin.stat:
+    path: "{{ playbook_dir }}/files/{{ images_tarball }}"
+  register: tar_stat
+  failed_when: tar_stat.stat.exists is not defined
+
+- name: Check k3s
+  ansible.builtin.stat:
+    path: "{{ playbook_dir }}/files/k3s"
+  register: k3s_stat
+  failed_when: k3s_stat.stat.exists is not defined
+
+- name: Check k9s
+  ansible.builtin.stat:
+    path: "{{ playbook_dir }}/files/k9s"
+  register: k9s_stat
+  failed_when: k9s_stat.stat.exists is not defined
+
+- name: Check rpm
+  ansible.builtin.stat:
+    path: "{{ playbook_dir }}/files/{{ k3s_rpm }}"
+  register: rpm_stat
+  failed_when: rpm_stat.stat.exists is not defined

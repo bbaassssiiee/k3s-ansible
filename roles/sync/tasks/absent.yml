@@ -1,0 +1,8 @@
+---
+# Tasks to converge to state absent for tools
+
+- name: Remove files
+  ansible.builtin.file:
+    state: absent
+    path: "{{ item }}"
+  with_fileglob: "{{ playbook_dir }}/files/*"

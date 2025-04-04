@@ -1,0 +1,29 @@
+---
+cert_manager_namespace: "cert-manager"
+cert_manager_user: 1001
+cert_manager_tolerations: []
+cert_manager_affinity: {}
+cert_manager_nodeselector: {}
+cert_manager_dns_policy: "ClusterFirst"
+cert_manager_dns_config: {}
+cert_manager_controller_extra_args: []
+kubectl: /usr/local/bin/kubectl
+kube_config_dir: /etc/kubernetes
+k8s_image_pull_policy: IfNotPresent
+cert_manager_version: "1.15.3"
+cert_manager_controller_image_tag: "v{{ cert_manager_version }}"
+cert_manager_cainjector_image_tag: "v{{ cert_manager_version }}"
+cert_manager_webhook_image_tag: "v{{ cert_manager_version }}"
+cert_manager_controller_image_repo: "quay.io/jetstack/cert-manager-controller"
+cert_manager_cainjector_image_repo: "quay.io/jetstack/cert-manager-cainjector"
+cert_manager_webhook_image_repo: "quay.io/jetstack/cert-manager-webhook"
+## Allow http_proxy, https_proxy and no_proxy environment variables
+## Details https://github.com/kubernetes-sigs/kubespray/blob/master/docs/proxy.md
+cert_manager_http_proxy: "{{ http_proxy | default('') }}"
+cert_manager_https_proxy: "{{ https_proxy | default('') }}"
+cert_manager_no_proxy: "{{ no_proxy | default('') }}"
+
+## Change leader election namespace when deploying on GKE Autopilot that forbid the changes on kube-system namespace.
+## See https://github.com/jetstack/cert-manager/issues/3717
+cert_manager_leader_election_namespace: kube-system
+desired_state: present

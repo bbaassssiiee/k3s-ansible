@@ -1,0 +1,13 @@
+---
+# defaults file for tools
+desired_state: present
+debug: false
+k3s_rpm: k3s-selinux-1.6-1.el8.noarch.rpm
+images_tarball: k3s-airgap-images-amd64.tar.gz
+
+file_downloads:
+  - "https://github.com/k3s-io/k3s/releases/download/v1.32.2%2Bk3s1/k3s"
+  - "https://github.com/k3s-io/k3s/releases/download/v1.32.2%2Bk3s1/{{ images_tarball }}"
+  - "https://github.com/derailed/k9s/releases/download/v0.40.10/k9s_Linux_amd64.tar.gz"
+
+rpm_download: "https://github.com/k3s-io/k3s-selinux/releases/download/v1.6.latest.1/{{ k3s_rpm }}"

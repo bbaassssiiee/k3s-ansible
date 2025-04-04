@@ -1,0 +1,33 @@
+---
+- name: Stat cert-manager.yml
+  ansible.builtin.stat:
+    path: "{{ kube_config_dir }}/addons/cert_manager/cert-manager.yml"
+  register: _cert_manager_manifest
+
+- name: Cert Manager | Remove
+  ansible.builtin.command: "{{ kubectl }}  delete -f {{ kube_config_dir }}/addons/cert_manager/cert-manager.yml"
+  register: _cert_manager_removal
+  when:
+    - inventory_hostname == groups['server'][0]
+    - _cert_manager_manifest.stat.exists | bool
+
+- name: Stat cert-manager.crds.yml
+  ansible.builtin.stat:
+    path: "{{ kube_config_dir }}/addons/cert_manager/cert-manager.crds.yml"
+  register: _cert_manager_manifest
+
+- name: Cert Manager | Remove custom resources
+  ansible.builtin.command: "{{ kubectl }}  delete -f {{ kube_config_dir }}/addons/cert_manager/cert-manager.crds.yml"
+  register: _cert_manager_removal
+  when:
+    - inventory_hostname == groups['server'][0]
+    - _cert_manager_manifest.stat.exists | bool
+
+- name: Cert Manager | Remove addon dir
+  ansible.builtin.file:
+    path: "{{ kube_config_dir }}/addons/cert_manager"
+    state: absent
+  when:
+    - inventory_hostname == groups['server'][0]
+    - _cert_manager_manifest.stat.exists | bool
+    - _cert_manager_removal.rc == 0
