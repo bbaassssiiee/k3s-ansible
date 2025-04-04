@@ -3,7 +3,7 @@ airgap
 
 ## Airgap Install
 
-It is assumed that the control node has access to the internet. This role will automatically download the k3s install script on the control node, and then distribute all three artifacts to the managed nodes.
+description: It is assumed that the control node has access to the internet. This role will automatically download the k3s install script on the control node, and then distribute all three artifacts to the managed nodes.
 
 Requirements
 ------------

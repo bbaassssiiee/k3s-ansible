@@ -1,4 +1,6 @@
----
+k3s_custom_registries
+=========
+
 Configure the use of a custom container registry
 
     options:

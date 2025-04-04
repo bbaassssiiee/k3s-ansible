@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: Bas Meijer
+  description: Install prerequisites for k3s
+  namespace: bbaassssiiee
+  role_name: prereq
+
+  license: Apache
+  min_ansible_version: "2.16.0"
+
+  platforms:
+    - name: EL
+      versions:
+        - "8"
+  galaxy_tags:
+    - k3s
+
+dependencies: []
+...
