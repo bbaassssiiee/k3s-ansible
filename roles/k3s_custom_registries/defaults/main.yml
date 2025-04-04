@@ -1,3 +1,4 @@
+---
 # Only enable this if you have set up your own container registry to act as a mirror / pull-through cache
 # (harbor / artifactory /nexus / docker's official registry / etc).
 # Can be beneficial for larger dev/test environments (for example if you're getting rate limited by docker hub),
