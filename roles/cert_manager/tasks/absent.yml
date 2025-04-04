@@ -7,6 +7,7 @@
 - name: Cert Manager | Remove
   ansible.builtin.command: "{{ kubectl }}  delete -f {{ kube_config_dir }}/addons/cert_manager/cert-manager.yml"
   register: _cert_manager_removal
+  changed_when: true
   when:
     - inventory_hostname == groups['server'][0]
     - _cert_manager_manifest.stat.exists | bool
@@ -18,6 +19,7 @@
 
 - name: Cert Manager | Remove custom resources
   ansible.builtin.command: "{{ kubectl }}  delete -f {{ kube_config_dir }}/addons/cert_manager/cert-manager.crds.yml"
+  changed_when: true
   register: _cert_manager_removal
   when:
     - inventory_hostname == groups['server'][0]

@@ -1,0 +1,20 @@
+---
+galaxy_info:
+  author: Bas Meijer
+  description: Install cert-manager in k3s
+  namespace: bbaassssiiee
+  role_name: cert_manager
+
+  license: Apache
+  min_ansible_version: "2.16.0"
+
+  platforms:
+    - name: EL
+      versions:
+        - "8"
+  galaxy_tags:
+    - k3s
+    - security
+
+dependencies: []
+...

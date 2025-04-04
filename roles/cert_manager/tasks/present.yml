@@ -13,6 +13,7 @@
   ansible.builtin.command: >
     {{ kubectl }} delete namespace {{ cert_manager_namespace }}
   ignore_errors: true  # noqa ignore-errors
+  changed_when: true
   when:
     - inventory_hostname == groups['server'][0]
   tags:
