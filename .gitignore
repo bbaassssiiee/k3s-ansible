@@ -3,6 +3,8 @@ venv
 .vscode
 .vagrant
 .ansible
+*.gz
+__pycache__
 files/k?s*
 inventory.yml
 playbook/debug.yml
