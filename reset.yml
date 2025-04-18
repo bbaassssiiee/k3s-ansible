@@ -16,7 +16,7 @@
         removes: /var/lib/rancher/k3s/*
     - name: Remove user kubeconfig
       ansible.builtin.file:
-        path: ~{{ ansible_user }}/.kube/config
+        path: ~{{ ansible_user_id }}/.kube/config
         state: absent
     - name: Remove k3s install script
       ansible.builtin.file:
@@ -38,6 +38,6 @@
   tasks:
     - name: Remove K3s commands from ~/.bashrc
       ansible.builtin.lineinfile:
-        path: "~{{ ansible_user }}/.bashrc"
+        path: "~{{ ansible_user_id }}/.bashrc"
         search_string: "Added by k3s-ansible"
         state: absent
